@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Api\ProductApi;
 use Http;
 use Illuminate\Http\Request;
 
@@ -13,19 +14,19 @@ class ApiController extends Controller
     }
     public function index()
     {
-        $products = Http::get("https://fakestoreapi.com/products")->json();
+        $products = ProductApi::getProducts();
         return view('api.index', compact('products'));
     }
     public function singleProduct($slug, $id)
     {
-        $product = Http::get("https://fakestoreapi.com/products/$id")->json();
+        $product = ProductApi::getSingleProducts($id);
         return view('api.product', compact('product'));
     }
     public function limitProduct(Request $request)
     {
 
         $limit = $request->limit;
-        $products = Http::get("https://fakestoreapi.com/products?limit=$limit")->json();
+        $products = ProductApi::getProductslimit($limit);
         return view('api.index', compact('products'));
     }
     public function desc()
@@ -39,7 +40,7 @@ class ApiController extends Controller
         return view('api.index', compact('products'));
     }
     public function categoryProduct($category){
-        $products = Http::get("https://fakestoreapi.com/products/category/$category")->json();
+        $products = ProductApi::getProductsCategory($category);
         return view('api.index', compact('products'));
     }
 

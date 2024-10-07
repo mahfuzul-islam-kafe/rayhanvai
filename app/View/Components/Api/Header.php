@@ -23,7 +23,8 @@ class Header extends Component
     public function render(): View|Closure|string
     {
         $categories = Http::get("https://fakestoreapi.com/products/categories")->json();
-        
-        return view('components.api.header', compact('categories'));
+        $cart = session()->get('cart', []);
+        $totalCount = array_sum(array_column($cart, 'quantity'));
+        return view('components.api.header', compact('categories','cart','totalCount'));
     }
 }

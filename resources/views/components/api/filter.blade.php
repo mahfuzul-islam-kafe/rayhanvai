@@ -1,7 +1,7 @@
 <p class="d-inline-flex gap-1">
     <button class="btn btn-secondary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
         aria-expanded="false" aria-controls="collapseExample">
-        Button with data-bs-target
+        Filter Button
     </button>
     <a class="btn btn-primary" href="{{route('reset')}}">
         Reset

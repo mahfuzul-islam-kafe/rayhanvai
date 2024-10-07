@@ -1,0 +1,18 @@
+.cart {
+    position: relative;
+    display: inline-block;
+}
+
+.num {
+    position: absolute;
+    top: -10px;  /* Adjust this value for vertical alignment */
+    right: -10px;  /* Adjust this value for horizontal alignment */
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+}
