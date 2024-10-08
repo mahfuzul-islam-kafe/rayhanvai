@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Services\Api\ProductApi;
 use Illuminate\Http\Request;
 
@@ -19,8 +20,9 @@ class CartController extends Controller
                 'product' => $product,
                 'quantity' => $item['quantity'],
             ];
+            
         }
-        
+
         // dd($products[0]['product'],$products[0]['quantity']);
 
         // Pass $cart and $products to the view
@@ -55,6 +57,28 @@ class CartController extends Controller
             session()->put('cart', $cart);
         }
         return redirect()->back();
+    }
+    public function checkOut()
+    {
+
+        $customer = new Customer();
+
+        if (request()->filled('phone')) {
+
+            $customer = $customer->where('number', request()->phone)->firstOrNew();
+        }
+        $cart = session()->get('cart', []);
+        $products = [];
+        $totalPrice = 0;
+        foreach ($cart as $item) {
+            $product = ProductApi::getSingleProducts($item['id']);
+            $totalPrice += $product['price'] * $item['quantity'];
+            $products[] = [
+                'product' => $product,
+                'quantity' => $item['quantity'],
+            ];
+        }
+        return view('api.checkout', compact('cart', 'products', 'totalPrice', 'customer'));
     }
 
 

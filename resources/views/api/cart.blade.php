@@ -31,7 +31,7 @@
     <div class="text-light d-flex justify-content-between ">
         <div class=""></div>
         <h3>Total Price : {{$totalPrice}} $</h3>
-        <div class="btn btn-info">Check Out</div>
+        <a href="{{route('checkout.cart')}}" class="btn btn-info">Check Out</a>
     </div>
    </div>
 
